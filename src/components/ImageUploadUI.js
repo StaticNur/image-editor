@@ -1,11 +1,15 @@
 import React from 'react';
+import iconDownload from '../assets/images/icon-download.png';
+import iconReload from '../assets/images/icon-reload.png';
+import iconDelete from '../assets/images/icon-delete.png';
+import iconPlus from '../assets/images/icon+.png';
+import iconEdit from '../assets/images/icon-edit.png';
 
-export const ImageUpload = ({ showImageHolder, dropAreaRef, fileInputRef, handleDrop,
-   iconPlus, handleFileChange, handleRefresh, iconReload, handleEdit, iconEdit,
-    handleRemove, iconDelete, imageSrc, iconDownload, handleDownload }) => {
+export const ImageUploadUI = ({ dropAreaRef, fileInputRef, handleDrop,
+  handleFileChange, handleRefresh, handleEdit, handleRemove, image, handleDownload }) => {
   return (
     <div className="upload">
-      <div className={`choose_image ${showImageHolder ? 'hidden' : 'block'}`}>
+      <div className={`choose_image ${image.src !== '' ? 'hidden' : 'block'}`}>
         <div
           className="upload_img_box"
           ref={dropAreaRef}
@@ -34,8 +38,8 @@ export const ImageUpload = ({ showImageHolder, dropAreaRef, fileInputRef, handle
         </div>
       </div>
 
-      {showImageHolder && (
-        <div className={`image_holder ${showImageHolder ? 'block' : 'hidden'}`}>
+      {image.src !== '' && (
+        <div className={`image_holder block`}>
           <div className="img_btns" id="img_btns">
             <p>Image</p>
             <button onClick={handleRefresh}>
@@ -52,11 +56,16 @@ export const ImageUpload = ({ showImageHolder, dropAreaRef, fileInputRef, handle
             </button>
           </div>
           <div id="loader" className="loader" style={{ display: 'none' }}></div>
-          <img src={imageSrc} alt="img" id="image" className="main-image" />
+          <img src={image.src}
+            alt="img"
+            id="image"
+            className="main-image"
+            style={{ width: image.width, height: image.height }}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default ImageUpload;
+export default ImageUploadUI;

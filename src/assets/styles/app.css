@@ -7,7 +7,9 @@ body {
     align-items: center;
     justify-content: center;
 }
-#root, .main {
+
+#root,
+.main {
     height: 100%;
     width: 80%;
     display: flex;
@@ -15,7 +17,8 @@ body {
     justify-content: center;
     position: relative;
 }
-.upload{
+
+.upload {
     height: 100%;
     width: 100%;
     display: flex;
@@ -48,11 +51,12 @@ body {
     display: none;
     margin-top: 110px;
 }
-.main-image {
+
+/*.main-image {
     width: 100%;
     height: 450px;
     object-fit: cover;
-}
+} */
 
 .choose_image {
     display: block;
@@ -175,6 +179,17 @@ input[type="file"] {
     flex-direction: row;
     justify-content: left;
     padding: 10px;
+}
+
+.option:hover {
+    border: 2px solid #dfdfdf;
+    border-radius: 8px;
+}
+
+.option.selected {
+    background-color: #12A3F8;
+    border-radius: 8px;
+    color: white;
 }
 
 .option img {
@@ -345,7 +360,9 @@ input[type="file"] {
 
 #cancel,
 #reset-adjust,
-#reset-crop {
+#reset-crop,
+#applyCropButton,
+#revert {
     width: 100%;
     background: none;
     border: none;
@@ -354,6 +371,11 @@ input[type="file"] {
     border-radius: 24px;
     padding: 8px 16px;
     margin-right: 12px;
+}
+
+#revert {
+    width: auto;
+    margin: 13px 0px;
 }
 
 #save {
@@ -370,6 +392,10 @@ input[type="file"] {
     width: 15%;
     padding: 16px;
     border-left: 2px solid #dfdfdf;
+    max-height: 545px;
+    /* Установите максимальную высоту контейнера */
+    overflow-y: auto;
+    /* Вертикальная прокрутка */
 }
 
 /* crop */
@@ -402,15 +428,41 @@ input[type="file"] {
     margin-bottom: 16px;
 }
 
+.section-angle {
+    margin-top: 16px
+}
+
+.angle-value {
+    width: 38px;
+    height: 20px;
+    text-align: center;
+    padding: 2px;
+    border: 2px solid #dfdfdf;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.fixed-angle {
+    margin-bottom: 10px;
+}
+
 /* rotate and flip */
 .rotate-flip button,
-.decorate button {
+.decorate button,
+.elements button {
     width: 45%;
     height: 70px;
     text-align: center;
     border-radius: 8px;
     border: 2px solid #dfdfdf;
     background: none;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.rotate-flip button:hover,
+.decorate button:hover,
+.elements button:hover,
+#toggleTextModeButton:hover {
+    border-color: #12A3F8;
 }
 
 .rotate,
@@ -481,7 +533,7 @@ input[type="file"] {
 }
 
 .slider-value {
-    width: 50px;
+    width: 60px;
     background: none;
     border: none;
     text-align: center;
@@ -496,6 +548,61 @@ input[type="file"] {
 }
 
 /* filter */
+.elements .selected {
+    border-color: #12A3F8; /* Цвет рамки для выбранного фильтра */
+}
+.filter-none img,
+.filter-black-white img,
+.filter-sepia img,
+.filter-vintage img {
+    width: 74px !important;
+    height: 74px;
+}
+
+.elements .filter-none,
+.elements .filter-black-white,
+.elements .filter-sepia,
+.elements .filter-vintage {
+    height: auto;
+}
+
+.lebel-for-filter {
+    text-align: center;
+    margin: 5px 0px;
+}
+
+.imageForFiltor {
+    overflow: hidden;
+    position: relative;
+}
+
+.imageForFiltor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    transform-origin: center;
+}
+
+.imageForFiltor img:hover {
+    transform: scale(1.2);
+}
+
+.none {
+    filter: none;
+}
+
+.black-white {
+    filter: grayscale(100%);
+}
+
+.sepia {
+    filter: sepia(100%);
+}
+
+.vintage {
+    filter: sepia(50%) contrast(85%) saturate(50%) hue-rotate(-10deg);
+}
 
 
 /* text */
@@ -547,7 +654,9 @@ input[type="file"] {
     margin-top: 8px;
     margin-bottom: 16px;
 }
-
+.text-color{
+    margin-left: 10px;
+}
 
 /* Decorate */
 .decorate {
@@ -577,6 +686,37 @@ input[type="file"] {
     justify-content: center;
     cursor: pointer;
     padding: 10px;
+}
+
+.settings-shape {
+    margin-top: 16px;
+}
+
+.color-shapes {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-elements-text {
+    width: 80px;
+    height: 20px;
+    text-align: center;
+    padding: 2px;
+    border: 2px solid #dfdfdf;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.width-line {
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    padding: 2px;
+    border: 2px solid #dfdfdf;
+    border-radius: 8px;
+    margin-right: 5px;
 }
 
 /* Alert befor close edit form */
