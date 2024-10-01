@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import iconT from '../../assets/images/icon-t.png';
+import iconTextLeft from '../../assets/images/icon-text-left.png';
+import iconTextCenter from '../../assets/images/icon-text-center.png';
+import iconTextRight from '../../assets/images/icon-text-right.png';
+import iconTextAll from '../../assets/images/icon-text-all.png';
 
-
-export const TextToolbar = ({ onAddShape, iconT, iconTextLeft,
-    iconTextCenter, iconTextRight, iconTextAll, onTextUpdate }) => {
+export const TextToolbar = ({ onAddShape, onTextUpdate }) => {
 
     const [font, setFont] = useState('Avenir Next');
-    const [size, setSize] = useState(12);
+    const [size, setSize] = useState(24);
     const [style, setStyle] = useState({ bold: false, italic: false, underline: false, strikethrough: false });
     const [alignment, setAlignment] = useState('left');
     const [color, setColor] = useState('#FFFF00');
 
-    // Trigger when any text attribute changes
     useEffect(() => {
         onTextUpdate({ font, size, style, alignment, color });
     }, [font, size, style, alignment, color]);
 
     return (
         <div className="tool text">
-            <button id="toggleTextModeButton" onClick={() => onAddShape('text')}>
-                <img src={iconT} alt="" title="Enable Text Mode" />
-            </button>
+            <div>
+                <button id="toggleTextModeButton" onClick={() => onAddShape('text')}>
+                    <img src={iconT} alt="Add text" title="Add Text" />
+                </button>
+            </div>
+
             <label htmlFor="font">Font</label>
             <select id="font" className="font-select" value={font} onChange={e => setFont(e.target.value)}>
                 <option value="Avenir Next">Avenir Next</option>
@@ -65,8 +70,11 @@ export const TextToolbar = ({ onAddShape, iconT, iconTextLeft,
                 </button>
             </div>
 
-            <label htmlFor="color">Color</label>
-            <input type="color" id="color" value={color} onChange={e => setColor(e.target.value)} />
+            <div className='color-shapes'>
+                <label htmlFor="color">Color:</label>
+                <input type="text" className="color-elements-text text-color" id="color-elements" value={color} onChange={e => setColor(e.target.value)} />
+                <input type="color" id="color" value={color} onChange={e => setColor(e.target.value)} />
+            </div>
         </div>
     );
 };

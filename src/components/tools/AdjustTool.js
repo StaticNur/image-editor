@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
-export const Adjust = ({ onAdjustChange }) => {
+export const AdjustTool = ({ onAdjustChange }) => {
     const [brightness, setBrightness] = useState(100);
     const [contrast, setContrast] = useState(100);
     const [saturation, setSaturation] = useState(100);
+    const [exposition, setExposition] = useState(1);
+    const [temperature, setTemperature] = useState(5000);
+
     const [blur, setBlur] = useState(0);
     const [inversion, setInversion] = useState(0);
 
@@ -20,6 +23,12 @@ export const Adjust = ({ onAdjustChange }) => {
             case 'saturation':
                 setSaturation(numericValue);
                 break;
+            case 'exposition':
+                setExposition(numericValue);
+                break;
+            case 'temperature':
+                setTemperature(numericValue);
+                break;
             case 'blur':
                 setBlur(numericValue);
                 break;
@@ -29,7 +38,7 @@ export const Adjust = ({ onAdjustChange }) => {
             default:
                 break;
         }
-        onAdjustChange({ brightness, contrast, saturation, blur, inversion });
+        onAdjustChange({ brightness, contrast, saturation, exposition, temperature, blur, inversion });
     };
 
 
@@ -37,9 +46,12 @@ export const Adjust = ({ onAdjustChange }) => {
         setBrightness(100);
         setContrast(100);
         setSaturation(100);
+        setExposition(1);
+        setTemperature(5000);
         setBlur(0);
         setInversion(0);
-        onAdjustChange({ brightness: 100, contrast: 100, saturation: 100, blur: 0, inversion: 0 });
+        onAdjustChange({ brightness: 100, contrast: 100,
+             saturation: 100, exposition: 1, temperature: 5000, blur: 0, inversion: 0 });
     };
 
     return (
@@ -102,6 +114,45 @@ export const Adjust = ({ onAdjustChange }) => {
             </div>
 
             <div className="slider-container">
+                <label className="slider-label" htmlFor="exposition">Exposition</label>
+                <input
+                    className="slider"
+                    type="range"
+                    id="exposition"
+                    min="-100"
+                    max="100"
+                    value={exposition}
+                    onChange={(e) => handleChange('exposition', e.target.value)}
+                />
+                <input
+                    className="slider-value"
+                    type="number"
+                    value={exposition}
+                    onChange={(e) => handleChange('exposition', e.target.value)}
+                />
+            </div>
+            <div className="slider-container">
+                <label className="slider-label" htmlFor="temperature">Temperature (Kelvin)</label>
+                <input
+                    className="slider"
+                    type="range"
+                    id="temperature"
+                    min="1000"
+                    max="8000"
+                    value={temperature}
+                    onChange={(e) => handleChange('temperature', e.target.value)}
+                />
+                <input
+                    className="slider-value"
+                    type="number"
+                    min="1000"
+                    max="8000"
+                    value={temperature}
+                    onChange={(e) => handleChange('temperature', e.target.value)}
+                />
+            </div>
+
+            <div className="slider-container">
                 <label className="slider-label" htmlFor="blur">Blur</label>
                 <input
                     className="slider"
@@ -145,4 +196,4 @@ export const Adjust = ({ onAdjustChange }) => {
         </div>
     );
 };
-export default Adjust;
+export default AdjustTool;
